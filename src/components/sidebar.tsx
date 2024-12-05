@@ -4,7 +4,8 @@ import { Layout } from './custom/layout'
 import { Button } from './custom/button'
 import Nav from './nav'
 import { cn } from '@/lib/utils'
-import { sidelinks } from '@/data/sidelinks'
+import { SideLink, sidelinks } from '@/data/sidelinks'
+import { Utilisateur } from '@/types'
 
 interface SidebarProps extends React.HTMLAttributes<HTMLElement> {
   isCollapsed: boolean
@@ -26,6 +27,18 @@ export default function Sidebar({
       document.body.classList.remove('overflow-hidden')
     }
   }, [navOpened])
+
+  const user = JSON.parse(localStorage.getItem('user')!) as Utilisateur
+
+  // Fonction pour filtrer les liens selon les rôles
+  const filterLinks = (links: SideLink[]): SideLink[] => {
+    return links
+      .filter((link) => !link.roles || link.roles.includes(user.role)) // Filtre les liens accessibles
+      .map((link) => ({
+        ...link,
+        sub: link.sub ? filterLinks(link.sub) : undefined, // Filtre aussi les sous-liens
+      }))
+  }
 
   return (
     <aside
@@ -75,13 +88,13 @@ export default function Sidebar({
                 strokeLinejoin='round'
                 strokeWidth='16'
               ></line>
-              <span className='sr-only'>Website Name</span>
+              <span className='sr-only'>Mutuel de santé</span>
             </svg>
             <div
               className={`flex flex-col justify-end truncate ${isCollapsed ? 'invisible w-0' : 'visible w-auto'}`}
             >
-              <span className='font-medium'>Shadcn Admin</span>
-              <span className='text-xs'>Vite + ShadcnUI</span>
+              <span className='font-medium'>Mutuel de santé</span>
+              <span className='text-xs'>{user.nom}</span>
             </div>
           </div>
 
@@ -105,7 +118,7 @@ export default function Sidebar({
           className={`z-40 h-full flex-1 overflow-auto ${navOpened ? 'max-h-screen' : 'max-h-0 py-0 md:max-h-screen md:py-2'}`}
           closeNav={() => setNavOpened(false)}
           isCollapsed={isCollapsed}
-          links={sidelinks}
+          links={filterLinks(sidelinks)}
         />
 
         {/* Scrollbar width toggle button */}

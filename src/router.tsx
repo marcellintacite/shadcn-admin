@@ -13,7 +13,7 @@ const router = createBrowserRouter([
     }),
   },
   {
-    path: '/sign-in-2',
+    path: '/',
     lazy: async () => ({
       Component: (await import('./pages/auth/sign-in-2')).default,
     }),
@@ -39,7 +39,7 @@ const router = createBrowserRouter([
 
   // Main routes
   {
-    path: '/',
+    path: '/dashboard',
     lazy: async () => {
       const AppShell = await import('./components/app-shell')
       return { Component: AppShell.default }
@@ -59,6 +59,61 @@ const router = createBrowserRouter([
         }),
       },
       {
+        path: 'health-zone',
+        lazy: async () => ({
+          Component: (await import('@/pages/healthzones')).default,
+        }),
+      },
+      {
+        path: 'health-zone/:id',
+        lazy: async () => ({
+          Component: (await import('@/pages/health-zone-pages/index.tsx'))
+            .default,
+        }),
+      },
+      {
+        path: 'health-zone/statistics',
+        lazy: async () => ({
+          Component: (await import('@/pages/statistics')).default,
+        }),
+      },
+      {
+        path: 'subscriptions',
+        lazy: async () => ({
+          Component: (await import('@/pages/payments')).default,
+        }),
+      },
+      {
+        path: 'reports',
+        lazy: async () => ({
+          Component: (await import('@/pages/reports')).default,
+        }),
+      },
+      {
+        path: 'members',
+        lazy: async () => ({
+          Component: (await import('@/pages/member')).default,
+        }),
+      },
+      {
+        path: 'members-verification',
+        lazy: async () => ({
+          Component: (await import('@/pages/members-verification')).default,
+        }),
+      },
+      {
+        path: 'members-treatment',
+        lazy: async () => ({
+          Component: (await import('@/pages/member-treatement')).default,
+        }),
+      },
+      {
+        path: 'members/:id',
+        lazy: async () => ({
+          Component: (await import('@/pages/member-page')).default,
+        }),
+      },
+      {
         path: 'chats',
         lazy: async () => ({
           Component: (await import('@/pages/chats')).default,
@@ -73,7 +128,7 @@ const router = createBrowserRouter([
       {
         path: 'users',
         lazy: async () => ({
-          Component: (await import('@/components/coming-soon')).default,
+          Component: (await import('@/pages/users')).default,
         }),
       },
       {

@@ -4,11 +4,13 @@ export default function useCheckActiveNav() {
   const { pathname } = useLocation()
 
   const checkActiveNav = (nav: string) => {
-    const pathArray = pathname.split('/').filter((item) => item !== '')
+    // Ensure nav always starts with '/'
+    const normalizedNav = nav.startsWith('/') ? nav : `/${nav}`
 
-    if (nav === '/' && pathArray.length < 1) return true
-
-    return pathArray.includes(nav.replace(/^\//, ''))
+    // Exact match for root or check if pathname starts with normalizedNav
+    return (
+      pathname === normalizedNav || pathname.startsWith(normalizedNav + '/')
+    )
   }
 
   return { checkActiveNav }

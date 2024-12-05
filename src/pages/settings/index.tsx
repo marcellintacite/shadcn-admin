@@ -29,10 +29,10 @@ export default function Settings() {
       <Layout.Body className='flex flex-col'>
         <div className='space-y-0.5'>
           <h1 className='text-2xl font-bold tracking-tight md:text-3xl'>
-            Settings
+            Paramètres
           </h1>
           <p className='text-muted-foreground'>
-            Manage your account settings and set e-mail preferences.
+            Gérer vos paramètres de compte
           </p>
         </div>
         <Separator className='my-4 lg:my-6' />
@@ -53,31 +53,11 @@ const sidebarNavItems = [
   {
     title: 'Profile',
     icon: <IconUser size={18} />,
-    href: '/settings',
+    href: '/dashboard/settings',
   },
   {
-    title: 'Account',
+    title: 'Tarifiation',
     icon: <IconTool size={18} />,
-    href: '/settings/account',
-  },
-  {
-    title: 'Appearance',
-    icon: <IconPalette size={18} />,
-    href: '/settings/appearance',
-  },
-  {
-    title: 'Notifications',
-    icon: <IconNotification size={18} />,
-    href: '/settings/notifications',
-  },
-  {
-    title: 'Display',
-    icon: <IconBrowserCheck size={18} />,
-    href: '/settings/display',
-  },
-  {
-    title: 'Error Example',
-    icon: <IconExclamationCircle size={18} />,
-    href: '/settings/error-example',
+    href: '/dashboard/settings/account',
   },
 ]

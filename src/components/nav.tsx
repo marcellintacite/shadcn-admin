@@ -23,7 +23,7 @@ import {
 import { cn } from '@/lib/utils'
 import useCheckActiveNav from '@/hooks/use-check-active-nav'
 import { SideLink } from '@/data/sidelinks'
-import { useTranslations } from 'use-intl'
+import { Utilisateur } from '@/types'
 
 interface NavProps extends React.HTMLAttributes<HTMLDivElement> {
   isCollapsed: boolean
@@ -90,7 +90,7 @@ function NavLink({
   subLink = false,
 }: NavLinkProps) {
   const { checkActiveNav } = useCheckActiveNav()
-  const t = useTranslations()
+
   return (
     <Link
       to={href}
@@ -106,7 +106,7 @@ function NavLink({
       aria-current={checkActiveNav(href) ? 'page' : undefined}
     >
       <div className='mr-2'>{icon}</div>
-      {t(title)}
+      {title}
       {label && (
         <div className='ml-2 rounded-lg bg-primary px-1 text-[0.625rem] text-primary-foreground'>
           {label}
@@ -118,7 +118,6 @@ function NavLink({
 
 function NavLinkDropdown({ title, icon, label, sub, closeNav }: NavLinkProps) {
   const { checkActiveNav } = useCheckActiveNav()
-  const t = useTranslations()
 
   /* Open collapsible by default
    * if one of child element is active */
@@ -133,7 +132,7 @@ function NavLinkDropdown({ title, icon, label, sub, closeNav }: NavLinkProps) {
         )}
       >
         <div className='mr-2'>{icon}</div>
-        {t(title)}
+        {title}
         {label && (
           <div className='ml-2 rounded-lg bg-primary px-1 text-[0.625rem] text-primary-foreground'>
             {label}

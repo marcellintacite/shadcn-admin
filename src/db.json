@@ -1,0 +1,191 @@
+{
+  "zonesDeSante": [
+    {
+      "id": "1",
+      "nom": "Zone A",
+      "structuresSanitaires": [
+        1,
+        2
+      ],
+      "membres": [
+        1,
+        2
+      ],
+      "responsable": 1,
+      "createdAt": "2024-01-01T10:00:00Z",
+      "updatedAt": "2024-11-15T08:30:00Z"
+    },
+    {
+      "id": "130",
+      "nom": "Zone de kaziba",
+      "responsable": 1,
+      "createdAt": "28/11/2024",
+      "updatedAt": "28/11/2024"
+    },
+    {
+      "id": 617,
+      "nom": "Zone de mwenga",
+      "responsable": 2,
+      "createdAt": "04/12/2024",
+      "updatedAt": "04/12/2024"
+    }
+  ],
+  "structuresSanitaires": [
+    {
+      "id": "1",
+      "nom": "Hôpital A",
+      "zoneDeSanteId": 1,
+      "traitements": [
+        {
+          "id": 1,
+          "membreId": 1,
+          "type": "hospitalisation",
+          "date": "2024-11-01",
+          "description": "Traitement de la malaria",
+          "createdAt": "2024-11-01T14:00:00Z",
+          "updatedAt": "2024-11-01T14:30:00Z"
+        }
+      ],
+      "createdAt": "2024-01-10T12:00:00Z",
+      "updatedAt": "2024-11-20T16:00:00Z"
+    }
+  ],
+  "membres": [
+    {
+      "id": "1",
+      "nom": "Jean Doe",
+      "forfaitActif": true,
+      "hospitalisationsRestantes": 2,
+      "soinsAmbulatoiresRestants": 3,
+      "zoneDeSanteId": 1,
+      "paiements": [
+        {
+          "annee": 2024,
+          "montant": 100,
+          "date": "2024-01-15",
+          "createdAt": "2024-01-15T09:00:00Z",
+          "updatedAt": "2024-01-15T09:30:00Z"
+        }
+      ],
+      "createdAt": "2024-01-01T08:00:00Z",
+      "updatedAt": "2024-11-01T10:00:00Z"
+    },
+    {
+      "id": "2",
+      "nom": "Marie Curie",
+      "forfaitActif": false,
+      "hospitalisationsRestantes": 1,
+      "soinsAmbulatoiresRestants": 2,
+      "zoneDeSanteId": 2,
+      "paiements": [
+        {
+          "annee": 2023,
+          "montant": 100,
+          "date": "2023-03-10",
+          "createdAt": "2023-03-10T11:00:00Z",
+          "updatedAt": "2023-03-10T11:30:00Z"
+        }
+      ],
+      "createdAt": "2023-02-15T08:30:00Z",
+      "updatedAt": "2024-01-01T12:00:00Z"
+    },
+    {
+      "id": "3",
+      "nom": "Paul Simon",
+      "forfaitActif": true,
+      "hospitalisationsRestantes": 0,
+      "soinsAmbulatoiresRestants": 3,
+      "zoneDeSanteId": 3,
+      "paiements": [
+        {
+          "annee": 2024,
+          "montant": 100,
+          "date": "2024-05-20",
+          "createdAt": "2024-05-20T14:00:00Z",
+          "updatedAt": "2024-05-20T14:30:00Z"
+        }
+      ],
+      "createdAt": "2024-03-01T09:15:00Z",
+      "updatedAt": "2024-06-01T16:00:00Z"
+    },
+    {
+      "id": "4",
+      "nom": "Anne Dupont",
+      "forfaitActif": false,
+      "hospitalisationsRestantes": 2,
+      "soinsAmbulatoiresRestants": 1,
+      "zoneDeSanteId": 4,
+      "paiements": [
+        {
+          "annee": 2022,
+          "montant": 100,
+          "date": "2022-08-15",
+          "createdAt": "2022-08-15T08:30:00Z",
+          "updatedAt": "2022-08-15T09:00:00Z"
+        }
+      ],
+      "createdAt": "2022-07-01T10:00:00Z",
+      "updatedAt": "2023-01-15T11:00:00Z"
+    },
+    {
+      "id": "5",
+      "nom": "Lucien Martin",
+      "forfaitActif": true,
+      "hospitalisationsRestantes": 1,
+      "soinsAmbulatoiresRestants": 2,
+      "zoneDeSanteId": 5,
+      "paiements": [
+        {
+          "annee": 2024,
+          "montant": 100,
+          "date": "2024-09-10",
+          "createdAt": "2024-09-10T13:00:00Z",
+          "updatedAt": "2024-09-10T13:30:00Z"
+        }
+      ],
+      "createdAt": "2024-07-01T10:30:00Z",
+      "updatedAt": "2024-11-01T10:30:00Z"
+    }
+  ],
+  "utilisateurs": [
+    {
+      "id": "1",
+      "nom": "Admin Zone A",
+      "email": "admin.zonea@example.com",
+      "motDePasse": "admin123",
+      "role": "admin_zone",
+      "zoneDeSanteId": 1,
+      "createdAt": "2024-01-01T07:00:00Z",
+      "updatedAt": "2024-10-30T10:00:00Z"
+    },
+    {
+      "id": "2",
+      "nom": "Agent Structure A",
+      "email": "agent.structure@example.com",
+      "motDePasse": "1234567",
+      "role": "agent_structure",
+      "structureSanitaireId": 1,
+      "createdAt": "2024-02-01T09:00:00Z",
+      "updatedAt": "2024-10-30T12:00:00Z"
+    },
+    {
+      "id": "3",
+      "nom": "Admin Global",
+      "email": "admin.global@example.com",
+      "motDePasse": "globaladmin",
+      "role": "admin_global",
+      "createdAt": "2024-01-15T08:30:00Z",
+      "updatedAt": "2024-10-31T11:00:00Z"
+    },
+    {
+      "id": "818",
+      "nom": "Aksanti Bahiga ",
+      "email": "tacite.bahiga@gmzil.com",
+      "motDePasse": "12345678",
+      "role": "admin_zone",
+      "zoneDeSanteId": 130,
+      "createdAt": "2024-11-28T18:37:30.748Z",
+      "updatedAt": "2024-11-28T18:37:30.748Z"
+    }
+  ]
+}

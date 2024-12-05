@@ -1,6 +1,6 @@
 import { HTMLAttributes, useState } from 'react'
 import { useForm } from 'react-hook-form'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate, useNavigation } from 'react-router-dom'
 import { z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { IconBrandFacebook, IconBrandGithub } from '@tabler/icons-react'
@@ -16,6 +16,8 @@ import { Input } from '@/components/ui/input'
 import { Button } from '@/components/custom/button'
 import { PasswordInput } from '@/components/custom/password-input'
 import { cn } from '@/lib/utils'
+import axiosInstance from '@/data/axios'
+import { toast } from '@/components/ui/use-toast'
 
 interface UserAuthFormProps extends HTMLAttributes<HTMLDivElement> {}
 
@@ -36,6 +38,7 @@ const formSchema = z.object({
 
 export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
   const [isLoading, setIsLoading] = useState(false)
+  const navigation = useNavigate()
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -45,13 +48,28 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
     },
   })
 
-  function onSubmit(data: z.infer<typeof formSchema>) {
+  const onSubmit = async (data: z.infer<typeof formSchema>) => {
     setIsLoading(true)
     console.log(data)
 
-    setTimeout(() => {
+    const response = await axiosInstance.get(
+      `/utilisateurs?email=${data.email}&motDePasse=${data.password}`
+    )
+    const users = response.data
+
+    if (users.length === 0) {
+      toast({
+        title: 'Erreur',
+        description: 'Adresse e-mail ou mot de passe invalide.',
+      })
       setIsLoading(false)
-    }, 3000)
+      throw new Error('Invalid email or password.')
+    }
+
+    const user = users[0] // Assuming unique emails
+    localStorage.setItem('user', JSON.stringify(user))
+    console.log('Login successful:', user)
+    navigation('/dashboard')
   }
 
   return (
@@ -78,12 +96,12 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
               render={({ field }) => (
                 <FormItem className='space-y-1'>
                   <div className='flex items-center justify-between'>
-                    <FormLabel>Password</FormLabel>
+                    <FormLabel>Mot de passe</FormLabel>
                     <Link
                       to='/forgot-password'
                       className='text-sm font-medium text-muted-foreground hover:opacity-75'
                     >
-                      Forgot password?
+                      Mot de passe oublié ?
                     </Link>
                   </div>
                   <FormControl>
@@ -94,40 +112,8 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
               )}
             />
             <Button className='mt-2' loading={isLoading}>
-              Login
+              Connexion
             </Button>
-
-            <div className='relative my-2'>
-              <div className='absolute inset-0 flex items-center'>
-                <span className='w-full border-t' />
-              </div>
-              <div className='relative flex justify-center text-xs uppercase'>
-                <span className='bg-background px-2 text-muted-foreground'>
-                  Or continue with
-                </span>
-              </div>
-            </div>
-
-            <div className='flex items-center gap-2'>
-              <Button
-                variant='outline'
-                className='w-full'
-                type='button'
-                loading={isLoading}
-                leftSection={<IconBrandGithub className='h-4 w-4' />}
-              >
-                GitHub
-              </Button>
-              <Button
-                variant='outline'
-                className='w-full'
-                type='button'
-                loading={isLoading}
-                leftSection={<IconBrandFacebook className='h-4 w-4' />}
-              >
-                Facebook
-              </Button>
-            </div>
           </div>
         </form>
       </Form>
